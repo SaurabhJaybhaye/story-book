@@ -1,0 +1,183 @@
+.spinnerContainer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+
+  &--overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-glass, rgba(255, 255, 255, 0.7));
+    backdrop-filter: blur(4px);
+    z-index: 50;
+  }
+
+  &--fullscreen {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+  }
+
+  &--hidden {
+    display: none;
+  }
+}
+
+.spinner {
+  --spinner-size: 32px;
+  --spinner-color: var(--primary, #0ea5e9);
+  --track-color: transparent;
+  --speed-multiplier: 1;
+
+  position: relative;
+  box-sizing: border-box;
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+  color: var(--spinner-color);
+
+  /* --- VARIANTS --- */
+
+  &--circular {
+    border: calc(var(--spinner-size) / 8) solid var(--track-color);
+    border-top-color: var(--spinner-color);
+    border-radius: 50%;
+    animation: circular-spin calc(0.8s / var(--speed-multiplier)) linear infinite;
+  }
+
+  &--ring {
+    border: calc(var(--spinner-size) / 10) solid var(--spinner-color);
+    border-radius: 50%;
+    opacity: 1;
+    animation: ring-pulse calc(1.2s / var(--speed-multiplier)) cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+
+  &--dots {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--spinner-size);
+    height: auto;
+    
+    &::before, &::after, & span {
+      content: '';
+      display: block;
+      width: calc(var(--spinner-size) / 4);
+      height: calc(var(--spinner-size) / 4);
+      border-radius: 50%;
+      background-color: var(--spinner-color);
+      animation: dots-bounce calc(1.4s / var(--speed-multiplier)) infinite ease-in-out both;
+    }
+
+    &::before { animation-delay: -0.32s; }
+    span { animation-delay: -0.16s; } /* Middle dot logic will be handled in TSX or pseudo usage */
+  }
+  /* Fix for pure CSS dots using 3 divs inside if needed, or stick to pseudo. 
+     For simplicity in CSS-only, we might rely on the DOM structure provided in TSX.
+  */
+
+  &--bars {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--spinner-size);
+    height: var(--spinner-size);
+
+    div {
+      width: 15%;
+      height: 100%;
+      background-color: var(--spinner-color);
+      animation: bars-wave calc(1.2s / var(--speed-multiplier)) ease-in-out infinite;
+    }
+
+    div:nth-child(1) { animation-delay: -1.1s; }
+    div:nth-child(2) { animation-delay: -1.0s; }
+    div:nth-child(3) { animation-delay: -0.9s; }
+    div:nth-child(4) { animation-delay: -0.8s; }
+    div:nth-child(5) { animation-delay: -0.7s; }
+  }
+
+  &--pulse {
+    background-color: var(--spinner-color);
+    border-radius: 50%;
+    animation: pulse-scale calc(1.0s / var(--speed-multiplier)) infinite ease-in-out;
+  }
+
+  &--wave {
+    position: relative;
+    /* Wave usually means concentric ripples or similar. Let's do a simple ripple. */
+    
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      border: calc(var(--spinner-size) / 20) solid var(--spinner-color);
+      opacity: 1;
+      border-radius: 50%;
+      animation: wave-ripple calc(1.6s / var(--speed-multiplier)) cubic-bezier(0, 0.2, 0.8, 1) infinite;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+    
+    &::after {
+      animation-delay: calc(-0.8s / var(--speed-multiplier));
+    }
+  }
+
+  &--paused {
+    animation-play-state: paused !important;
+    &::before, &::after, & div, & span {
+        animation-play-state: paused !important;
+    }
+  }
+}
+
+.message {
+  margin-top: 1rem;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  color: var(--text-muted, #64748b);
+  font-weight: 500;
+  text-align: center;
+}
+
+/* --- ANIMATIONS --- */
+
+@keyframes circular-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ring-pulse {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes dots-bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+@keyframes bars-wave {
+  0%, 40%, 100% { transform: scaleY(0.4); }
+  20% { transform: scaleY(1); }
+}
+
+@keyframes pulse-scale {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes wave-ripple {
+  0% { top: 48%; left: 48%; width: 4%; height: 4%; opacity: 1; }
+  100% { top: 0; left: 0; width: 100%; height: 100%; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner, .spinner::before, .spinner::after, .spinner div, .spinner span {
+    animation-duration: 10s !important; /* Slow down significantly instead of remove */
+  }
+}

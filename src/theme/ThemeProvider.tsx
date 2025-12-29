@@ -64,7 +64,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode; initialTheme?: Theme
 
   return (
     <ThemeContext.Provider value={{ theme: currentTheme, setThemeMode: applyTheme }}>
-      <div style={{ backgroundColor: currentTheme.colors.bgBody, color: currentTheme.colors.textMain, minHeight: '100vh', width: '100%', padding: '2rem', boxSizing: 'border-box', transition: 'all 0.3s' }}>
+      <div style={{ backgroundColor: currentTheme.colors.bgBody, color: currentTheme.colors.textMain, minHeight: '20vh', width: '100%', padding: '2rem', boxSizing: 'border-box', transition: 'all 0.3s' }}>
         {children}
       </div>
     </ThemeContext.Provider>
