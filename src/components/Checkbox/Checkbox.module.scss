@@ -1,0 +1,169 @@
+.wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  font-family: var(--font-body, "Inter", sans-serif);
+  color: var(--text-main, #1f2937);
+  
+  /* Prevent text selection when clicking quickly */
+  user-select: none;
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &--label-left {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  &--label-top {
+    flex-direction: column-reverse;
+  }
+  
+  &--label-right {
+    flex-direction: row;
+  }
+}
+
+.checkboxContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hide native input but keep it accessible for keyboard */
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: inherit;
+  z-index: 1;
+}
+
+.control {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: var(--border-radius-sm, 4px);
+  transition: all 0.2s ease-in-out;
+  background-color: var(--bg-main, #ffffff);
+  border-color: var(--border-color, #d1d5db);
+  color: #fff;
+
+  /* Checkmark svg */
+  svg {
+    transform: scale(0);
+    transition: transform 0.1s ease-in-out;
+    width: 1em;
+    height: 1em; /* SVG scales with font-size of control */
+  }
+
+  /* -- SIZES -- */
+  &--sm {
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.75rem; /* Icon size relative to this */
+  }
+
+  &--md {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 0.875rem;
+  }
+
+  &--lg {
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1rem;
+  }
+
+  /* -- VARIANTS -- */
+  
+  /* Default/Filled are similar in checkboxes usually, outlined handled by border */
+  &--default, &--filled {
+    /* Base styles already applied */
+  }
+
+  &--outlined {
+    background-color: transparent;
+  }
+}
+
+/* Checked / Indeterminate State */
+.input:checked + .control,
+.input:indeterminate + .control, 
+.control--checked, 
+.control--indeterminate {
+  background-color: var(--primary, #3b82f6);
+  border-color: var(--primary, #3b82f6);
+
+  svg {
+    transform: scale(1);
+  }
+}
+
+/* Hover State */
+.wrapper:hover:not(.wrapper--disabled) .control {
+  border-color: var(--primary, #3b82f6);
+}
+
+/* Focus State */
+.input:focus-visible + .control {
+  box-shadow: 0 0 0 4px var(--primary-glow, rgba(59, 130, 246, 0.4));
+  border-color: var(--primary, #3b82f6);
+}
+
+/* Error State */
+.wrapper--error {
+  .control {
+    border-color: var(--danger, #ef4444);
+  }
+
+  .input:checked + .control,
+  .input:focus-visible + .control {
+    background-color: var(--danger, #ef4444);
+    border-color: var(--danger, #ef4444);
+  }
+  
+  .input:focus-visible + .control {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.4);
+  }
+}
+
+.labelContent {
+  display: flex;
+  flex-direction: column;
+  line-height: normal; /* Fix alignment */
+  padding-top: 0.1em; /* Micro-adjustment for baseline alignment */
+  
+  &--sm { font-size: 0.875rem; }
+  &--md { font-size: 1rem; }
+  &--lg { font-size: 1.125rem; }
+}
+
+.labelText {
+  font-weight: 500;
+}
+
+.helperText {
+  font-size: 0.85em;
+  color: var(--text-muted, #6b7280);
+  margin-top: 0.125rem;
+  font-weight: 400;
+
+  &--error {
+    color: var(--danger, #ef4444);
+  }
+}
