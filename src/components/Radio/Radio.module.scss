@@ -1,0 +1,227 @@
+.wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  font-family: var(--font-body, "Inter", sans-serif);
+  color: var(--text-main, #1f2937);
+  user-select: none;
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
+  &--label-left {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+
+  &--label-top {
+    flex-direction: column-reverse;
+  }
+  
+  &--label-right {
+    flex-direction: row;
+  }
+
+  /* Card Variant Wrapper Overrides */
+  &--card {
+    border: 1px solid var(--border-color, #d1d5db);
+    padding: 1rem;
+    border-radius: var(--border-radius, 8px);
+    transition: all 0.2s ease-in-out;
+    width: 100%;
+    
+    &:hover:not(.wrapper--disabled) {
+      border-color: var(--primary, #3b82f6);
+      background-color: var(--bg-hover, #f3f4f6);
+    }
+  }
+
+  &--card-checked {
+    border-color: var(--primary, #3b82f6);
+    background-color: var(--primary-light, #eff6ff);
+    box-shadow: 0 0 0 1px var(--primary, #3b82f6);
+  }
+}
+
+.radioContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: inherit;
+  z-index: 1;
+}
+
+.control {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 50%; /* Circular for Radio */
+  transition: all 0.2s ease-in-out;
+  background-color: var(--bg-main, #ffffff);
+  border-color: var(--border-color, #d1d5db);
+  color: var(--primary, #3b82f6);
+
+  /* Inner dot for radio */
+  &::after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 50%;
+    border-radius: 50%;
+    background-color: currentColor;
+    transform: scale(0);
+    transition: transform 0.1s ease-in-out;
+  }
+
+  /* -- SIZES -- */
+  &--sm {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &--md {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  &--lg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  /* -- VARIANTS -- */
+  /* Default/Filled variants share base styles */
+  
+  &--outlined {
+    background-color: transparent;
+  }
+}
+
+/* Checked State */
+.input:checked + .control {
+  border-color: var(--primary, #3b82f6);
+  
+  &::after {
+    transform: scale(1);
+  }
+}
+
+/* Hover State */
+.wrapper:hover:not(.wrapper--disabled) .control {
+  border-color: var(--primary, #3b82f6);
+}
+
+/* Focus State */
+.input:focus-visible + .control {
+  box-shadow: 0 0 0 4px var(--primary-glow, rgba(59, 130, 246, 0.4));
+  border-color: var(--primary, #3b82f6);
+}
+
+/* Error State */
+.wrapper--error {
+  .control {
+    border-color: var(--danger, #ef4444);
+    color: var(--danger, #ef4444);
+  }
+
+  .input:checked + .control,
+  .input:focus-visible + .control {
+    border-color: var(--danger, #ef4444);
+  }
+  
+  .input:focus-visible + .control {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.4);
+  }
+  
+  &.wrapper--card {
+    border-color: var(--danger, #ef4444);
+    
+    &:hover:not(.wrapper--disabled) {
+       border-color: var(--danger, #ef4444);
+       background-color: #fef2f2;
+    }
+  }
+  
+  &.wrapper--card-checked {
+    background-color: #fef2f2;
+    box-shadow: 0 0 0 1px var(--danger, #ef4444);
+  }
+}
+
+.labelContent {
+  display: flex;
+  flex-direction: column;
+  line-height: normal;
+  padding-top: 0.1em;
+  
+  &--sm { font-size: 0.875rem; }
+  &--md { font-size: 1rem; }
+  &--lg { font-size: 1.125rem; }
+}
+
+.labelText {
+  font-weight: 500;
+}
+
+.helperText {
+  font-size: 0.85em;
+  color: var(--text-muted, #6b7280);
+  margin-top: 0.125rem;
+  font-weight: 400;
+
+  &--error {
+    color: var(--danger, #ef4444);
+  }
+}
+
+/* Radio Group Styles */
+.group {
+  display: flex;
+  gap: 1rem;
+  
+  &--vertical {
+    flex-direction: column;
+  }
+  
+  &--horizontal {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.groupLabel {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-main, #1f2937);
+  font-size: 1rem;
+}
+
+.groupHelperText {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-muted, #6b7280);
+  margin-top: 0.25rem;
+  
+  &--error {
+    color: var(--danger, #ef4444);
+  }
+}
