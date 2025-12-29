@@ -1,22 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './Button';
-import { ThemeProvider } from '../../theme/ThemeProvider';
+
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
   decorators: [
-    (Story, context) => {
-      const themeMode = context.parameters.theme || 'light';
-      return (
-        <ThemeProvider initialTheme={themeMode}>
-          <div style={{ padding: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <Story />
-          </div>
-        </ThemeProvider>
-      );
-    },
+    (Story) => (
+      <div style={{ padding: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+        <Story />
+      </div>
+    ),
   ],
   argTypes: {
     variant: {
