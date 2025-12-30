@@ -1,0 +1,153 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-glass, rgba(0, 0, 0, 0.5));
+  backdrop-filter: blur(2px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+
+  &--open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.container {
+  position: fixed;
+  background-color: var(--bg-body, #ffffff);
+  color: var(--text-main, #1f2937); // Ensure text color is inherited
+  box-shadow: var(--card-shadow, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  overflow: hidden;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+// --- PLACEMENTS ---
+
+.container--right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  transform: translateX(100%);
+  
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.container--left {
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform: translateX(-100%);
+  
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.container--top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(-100%);
+  
+  &.open {
+    transform: translateY(0);
+  }
+}
+
+.container--bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(100%);
+  
+  &.open {
+    transform: translateY(0);
+  }
+}
+
+// --- SIZES (for Left/Right) ---
+
+.size--sm { width: 320px; }
+.size--md { width: 480px; }
+.size--lg { width: 640px; }
+.size--xl { width: 800px; }
+.size--full { width: 100%; }
+
+// --- SIZES (for Top/Bottom) ---
+.container--top, .container--bottom {
+    &.size--sm { height: 30vh; }
+    &.size--md { height: 50vh; }
+    &.size--lg { height: 80vh; }
+    &.size--xl { height: 90vh; }
+    &.size--full { height: 100%; }
+}
+
+
+// --- SUBCOMPONENTS ---
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border-glass, rgba(0,0,0,0.1));
+  flex-shrink: 0;
+  
+  // Generic h2 or .title class
+  .title, h2 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-main, #1f2937);
+  }
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--border-radius, 6px);
+  color: var(--text-muted, #6b7280);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background-color: var(--bg-alt, #f3f4f6);
+    color: var(--danger, #ef4444);
+  }
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  color: var(--text-main, #374151);
+}
+
+.footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border-glass, rgba(0,0,0,0.1));
+  background-color: var(--bg-alt, #f9fafb);
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  
+  // Ensure footer text is visible
+  color: var(--text-main, #374151);
+}

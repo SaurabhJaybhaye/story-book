@@ -1,0 +1,218 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  font-family: var(--font-body, sans-serif);
+  font-weight: 600;
+  line-height: 1.25;
+  transition: var(--transition, all 0.2s ease-in-out);
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  
+  &:disabled,
+  &--loading {
+    cursor: not-allowed;
+    opacity: 0.65;
+    box-shadow: none !important;
+  }
+
+  /* --- VARIANTS --- */
+
+  &--primary {
+    background-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 4px 6px -1px var(--primary-glow);
+    
+    &:hover:not(:disabled) {
+      filter: brightness(110%);
+      box-shadow: 0 6px 8px -1px var(--primary-glow);
+    }
+    
+    &:active:not(:disabled) {
+      transform: translateY(1px);
+    }
+  }
+
+  &--secondary {
+    background-color: var(--secondary);
+    color: #ffffff;
+    
+    &:hover:not(:disabled) {
+      filter: brightness(110%);
+    }
+  }
+
+  &--tertiary {
+    background-color: var(--bg-alt);
+    color: var(--text-main);
+    border-color: var(--border-glass);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--bg-glass);
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border-color: var(--primary);
+    color: var(--primary);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--primary);
+      color: #ffffff;
+    }
+  }
+
+  &--ghost {
+    background-color: transparent;
+    color: var(--text-muted);
+    
+    &:hover:not(:disabled) {
+      background-color: var(--bg-alt);
+      color: var(--text-main);
+    }
+  }
+
+  &--link {
+    background-color: transparent;
+    color: var(--primary);
+    padding-left: 0;
+    padding-right: 0;
+    box-shadow: none;
+    
+    &:hover:not(:disabled) {
+      text-decoration: underline;
+    }
+  }
+
+  &--danger {
+    background-color: var(--danger);
+    color: #ffffff;
+    
+    &:hover:not(:disabled) {
+      filter: brightness(90%);
+    }
+  }
+
+  &--success {
+    background-color: var(--success);
+    color: #ffffff;
+    
+    &:hover:not(:disabled) {
+      filter: brightness(90%);
+    }
+  }
+
+  &--warning {
+    background-color: var(--warning);
+    color: #000000;
+    
+    &:hover:not(:disabled) {
+      filter: brightness(95%);
+    }
+  }
+  
+  &--info {
+    background-color: var(--info);
+    color: #ffffff;
+    
+    &:hover:not(:disabled) {
+      filter: brightness(110%);
+    }
+  }
+
+  /* --- SIZES --- */
+
+  &--xs {
+    height: 24px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  &--sm {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+
+  &--md {
+    height: 40px;
+    padding: 0 16px;
+    font-size: 16px;
+  }
+
+  &--lg {
+    height: 48px;
+    padding: 0 24px;
+    font-size: 18px;
+  }
+
+  &--xl {
+    height: 56px;
+    padding: 0 32px;
+    font-size: 20px;
+  }
+
+  /* --- SHAPES --- */
+  
+  &--rounded-sm { border-radius: 4px; }
+  &--rounded-md { border-radius: var(--border-radius, 8px); }
+  &--rounded-lg { border-radius: 16px; }
+  &--pill { border-radius: 9999px; }
+  &--square { border-radius: 0; }
+  &--circle { border-radius: 50%; padding: 0; width: 40px; } /* Override width for circles */
+
+  /* --- MODIFIERS --- */
+
+  &--full-width {
+    width: 100%;
+    display: flex;
+  }
+  
+  /* --- INTERNAL ELEMENTS --- */
+
+  &__content {
+    margin: 0 8px;
+    
+    &:first-child { margin-left: 0; }
+    &:last-child { margin-right: 0; }
+  }
+  
+  &__iconLeft {
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  &__iconRight {
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+  }
+  
+  &__spinner {
+    margin-right: 8px;
+    display: flex;
+    width: 1em;
+    height: 1em;
+    animation: spin 1s linear infinite;
+    
+    &Track {
+      opacity: 0.25;
+    }
+    
+    &Path {
+      opacity: 0.75;
+    }
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
