@@ -1,0 +1,238 @@
+.wrapper {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--font-body);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-right: 2.5rem; // Space for icon
+  font-size: 0.875rem;
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius);
+  background-color: var(--bg-alt); // Matching Input filled/default style
+  color: var(--text-main);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-glow);
+  }
+
+  &:disabled {
+    background-color: var(--bg-alt);
+    color: var(--text-muted);
+    cursor: not-allowed;
+  }
+}
+
+.input--error {
+  border-color: var(--danger);
+  &:focus {
+      box-shadow: 0 0 0 3px var(--danger-glow);
+      border-color: var(--danger);
+  }
+}
+
+.icon {
+  position: absolute;
+  right: 0.75rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.clearButton {
+  position: absolute;
+  right: 2.25rem; // Left of calendar icon
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  padding: 0.25rem;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: var(--bg-alt);
+    color: var(--danger);
+  }
+}
+
+.popup {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  z-index: 50;
+  background-color: var(--bg-body);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+  padding: 1rem;
+  width: 320px;
+  display: none;
+  animation: fadeIn 0.2s ease;
+
+  &--open {
+    display: block;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  color: var(--text-muted);
+  
+  &:hover {
+    background-color: var(--bg-alt);
+    color: var(--primary);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+.currentMonth {
+  background: transparent;
+  border: none;
+  font-weight: 600;
+  color: var(--text-main);
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem; // Explicit font size for consistency
+  
+  &:hover {
+     background-color: var(--bg-alt);
+  }
+}
+
+// Calendar Grid
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.weekDay {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  padding: 0.5rem 0;
+  font-weight: 500;
+}
+
+.day {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  color: var(--text-main);
+  background: none;
+  border: none;
+  border-radius: 50%; // Circular selection
+  cursor: pointer;
+  
+  &:hover:not(:disabled) {
+    background-color: var(--bg-alt);
+  }
+
+  &--selected {
+    background-color: var(--primary) !important;
+    color: white !important;
+  }
+
+  &--today {
+    border: 1px solid var(--primary);
+    color: var(--primary);
+  }
+
+  &--outside { // Days from prev/next month
+    color: var(--text-muted); // Lighter
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    text-decoration: line-through;
+  }
+}
+
+// Month Picker Grid
+.monthGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.monthButton {
+  padding: 0.75rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-main);
+  
+  &:hover:not(:disabled) {
+     background-color: var(--bg-alt);
+  }
+  
+  &--selected {
+    background-color: var(--primary) !important;
+    color: white !important;
+  }
+  
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+
+// Footer for Error handling
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 0.75rem;
+  min-height: 1.25em; 
+  margin-top: 0.25rem;
+}
+
+.helperText {
+  color: var(--text-muted);
+  
+  &--error { color: var(--danger); font-weight: 500; }
+}
