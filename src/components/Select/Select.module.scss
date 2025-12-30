@@ -1,0 +1,203 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--font-body, "Inter", sans-serif);
+  
+  &--fullWidth {
+    width: 100%;
+  }
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: var(--text-main, #1f2937);
+
+  &--error {
+    color: var(--danger, #ef4444);
+  }
+}
+
+.helperText {
+  font-size: 0.75rem;
+  color: var(--text-muted, #6b7280);
+  
+  &--error {
+    color: var(--danger, #ef4444);
+  }
+}
+
+// React Select Overrides
+// We use a specific class prefix or specificity to override internal styles if necessary.
+// Since we will use the `classNames` API, we can target these specific classes.
+
+.control {
+  // Common control styles
+  transition: all 0.2s ease !important;
+  box-shadow: none !important; // Override default react-select shadow
+  
+  &:hover {
+    border-color: var(--primary, #3b82f6) !important;
+  }
+
+  &--focused {
+     border-color: var(--primary, #3b82f6) !important;
+     box-shadow: 0 0 0 4px var(--primary-glow, rgba(59, 130, 246, 0.4)) !important;
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    background-color: var(--bg-disabled, #f3f4f6) !important;
+  }
+  
+
+
+  // --- SIZES ---
+  &--sm {
+    min-height: 2rem !important;
+    font-size: 0.875rem;
+  }
+  
+  &--md {
+    min-height: 2.5rem !important; // 40px
+    font-size: 1rem;
+  }
+  
+  &--lg {
+    min-height: 3rem !important; // 48px
+    font-size: 1.125rem;
+  }
+
+  // --- VARIANTS ---
+  &--outlined {
+    background-color: var(--bg-body, #ffffff) !important;
+    border: 1px solid var(--border-glass, rgba(0,0,0,0.1)) !important;
+    border-radius: var(--border-radius, 6px) !important;
+  }
+
+  &--filled {
+    background-color: var(--bg-alt, #f3f4f6) !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--border-radius, 6px) !important;
+
+    &:hover, &.control--focused {
+       background-color: var(--bg-body, #ffffff) !important;
+    }
+  }
+
+  &--underlined {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid var(--border-glass, rgba(0,0,0,0.1)) !important;
+    border-radius: 0 !important;
+    
+    &:hover, &.control--focused {
+       border-bottom-color: var(--primary, #3b82f6) !important;
+       box-shadow: none !important; // No glow for underlined usually
+    }
+  }
+
+  &--ghost {
+    background-color: transparent !important;
+    border: 1px solid transparent !important;
+    
+    &:hover, &.control--focused {
+       background-color: var(--bg-alt, #f3f4f6) !important;
+    }
+  }
+
+  &--error {
+    border-color: var(--danger, #ef4444) !important;
+    border: 1px solid var(--danger, #ef4444) !important;
+    
+    &:hover, &.control--focused {
+       border-color: var(--danger, #ef4444) !important;
+       box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.4) !important;
+    }
+  }
+}
+
+.menu {
+  background-color: var(--bg-body, #ffffff) !important;
+  z-index: 50 !important;
+  border-radius: var(--border-radius, 6px) !important;
+  box-shadow: var(--card-shadow, 0 4px 6px -1px rgba(0, 0, 0, 0.1)) !important;
+  border: 1px solid var(--border-glass, rgba(0,0,0,0.1)) !important;
+  overflow: hidden !important;
+}
+
+.option {
+  cursor: pointer !important;
+  padding: 0.5rem 1rem !important;
+  font-size: inherit !important;
+  color: var(--text-main, #1f2937) !important;
+
+  &--focused {
+    background-color: var(--bg-alt, #f3f4f6) !important;
+    color: var(--text-main, #1f2937) !important;
+  }
+
+  &--selected {
+    background-color: var(--primary-glow, #eff6ff) !important; // Use primaryGlow for selected bg
+    color: var(--primary, #3b82f6) !important;
+    font-weight: 500 !important;
+    
+    &:active {
+       background-color: var(--primary-glow, #eff6ff) !important;
+    }
+  }
+}
+
+.placeholder {
+  color: var(--text-muted, #9ca3af) !important;
+}
+
+.singleValue {
+  color: var(--text-main, #1f2937) !important;
+}
+
+.multiValue {
+  background-color: var(--bg-alt, #e5e7eb) !important;
+  border-radius: 4px !important;
+}
+
+.multiValueLabel {
+  color: var(--text-main, #374151) !important;
+  font-size: 0.85em !important;
+}
+
+.multiValueRemove {
+  cursor: pointer !important;
+  &:hover {
+    background-color: var(--danger-light, #fca5a5) !important;
+    color: var(--danger-dark, #991b1b) !important;
+  }
+}
+
+.dropdownIndicator {
+  padding: 8px !important;
+  color: var(--text-muted, #9ca3af) !important;
+  
+  &:hover {
+    color: var(--text-main, #4b5563) !important;
+  }
+}
+
+.clearIndicator {
+   color: var(--text-muted, #9ca3af) !important;
+   &:hover {
+     color: var(--danger, #ef4444) !important;
+   }
+}
+
+.valueContainer {
+  padding: 2px 8px !important; // Add padding back
+  gap: 0.5rem;
+}
+
+.indicatorsContainer {
+  gap: 0.25rem;
+}
