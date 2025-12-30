@@ -1,0 +1,216 @@
+@use 'sass:math';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: var(--font-body, "Inter", sans-serif);
+}
+
+.item {
+  width: 100%;
+  overflow: hidden;
+  
+  // Base border separation logic could go here depending on variant
+  
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-main, #1f2937);
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  padding: 0; // Handled by size modifiers
+  
+
+  
+  &:focus-visible {
+    outline: 2px solid var(--primary, #3b82f6);
+    outline-offset: -2px;
+    z-index: 10;
+  }
+}
+
+.headerContent {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   gap: 0.125rem;
+}
+
+.subHeader {
+  font-size: 0.85em;
+  color: var(--text-muted, #6b7280);
+  font-weight: 400;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  color: var(--text-muted, #9ca3af);
+  flex-shrink: 0;
+  
+  &--expanded {
+    transform: rotate(180deg);
+  }
+
+  &--left {
+    margin-right: 0.75rem;
+  }
+  
+  &--right {
+     margin-left: 0.75rem;
+  }
+}
+
+// Ensure icon position validity
+.header--icon-left {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  
+  .headerContent {
+     flex: 1;
+  }
+  
+  .icon--left {
+    margin-right: 0.75rem; // Becomes margin-left visually if row-reverse? No, flex items order changes.
+    // Better to handle in JSX order, or just use order property?
+    // Let's rely on JSX ordering for simplicity in component code, but if using same structure:
+  }
+}
+
+
+.contentWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  
+  &--expanded {
+    grid-template-rows: 1fr;
+  }
+}
+
+.content {
+  overflow: hidden;
+}
+
+.contentInner {
+ padding-top: 0; // Handled by variants
+}
+
+// --- VARIANTS ---
+
+.wrapper--default {
+   gap: 1px; // Separator
+}
+
+.item--default {
+  border-bottom: 1px solid var(--border-glass, rgba(0,0,0,0.1));
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  .header {
+     background-color: transparent;
+     &:hover {
+        background-color: var(--bg-alt, #f3f4f6);
+     }
+  }
+}
+
+.item--outlined {
+  border: 1px solid var(--border-glass, rgba(0,0,0,0.1));
+  margin-bottom: -1px; // Collapse borders
+  
+  &:first-child {
+    border-top-left-radius: var(--border-radius, 6px);
+    border-top-right-radius: var(--border-radius, 6px);
+  }
+  
+  &:last-child {
+    border-bottom-left-radius: var(--border-radius, 6px);
+    border-bottom-right-radius: var(--border-radius, 6px);
+    margin-bottom: 0;
+  }
+  
+  .header {
+    &:hover {
+       background-color: var(--bg-alt, #f3f4f6);
+    }
+  }
+}
+
+.wrapper--bordered {
+  gap: 0.5rem;
+}
+
+.item--bordered {
+  border: 1px solid var(--border-glass, rgba(0,0,0,0.1));
+  border-radius: var(--border-radius, 6px);
+  background-color: var(--bg-body, white);
+  
+  .header {
+     &:hover {
+        background-color: var(--bg-alt, #f3f4f6);
+     }
+  }
+}
+
+.item--ghost {
+  background-color: transparent;
+  .header {
+    &:hover {
+       background-color: var(--bg-alt, #f3f4f6);
+       border-radius: var(--border-radius, 6px);
+    }
+  }
+}
+
+
+// --- SIZES ---
+
+.item--sm {
+  .header {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+  .contentInner {
+    padding: 0.5rem 0.75rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+.item--md {
+  .header {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+  .contentInner {
+    padding: 0.5rem 1rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+.item--lg {
+  .header {
+    padding: 1rem 1.25rem;
+    font-size: 1.125rem;
+  }
+  .contentInner {
+    padding: 0.5rem 1.25rem 1.25rem;
+    font-size: 1.125rem;
+  }
+}
