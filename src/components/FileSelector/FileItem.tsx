@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import type { FileItemProps } from './FileSelector.types';
 import styles from './FileSelector.module.scss';
 import { DEFAULT_LAYOUT } from './FileSelector.constants';
+import { Typography } from '../Typography';
 
 // Icons
 const FileIcon = () => (
@@ -75,12 +76,17 @@ export const FileItem: React.FC<FileItemProps> = ({
       </div>
 
       <div className={clsx(styles.fileInfo, styles[`fileInfo--${layout}`])}>
-        <div className={styles.fileName} title={file.name}>{file.name}</div>
+        <Typography variant="body2" className={styles.fileName} title={file.name} truncate>
+            {file.name}
+        </Typography>
         <div className={styles.fileMeta}>
-          <span>{formatBytes(file.size)}</span>
+          <Typography variant="caption" as="span">{formatBytes(file.size)}</Typography>
           {status !== 'idle' && (
-             <span className={clsx(styles.status, styles[`status--${status}`])}>
-                {statusIcon} {status}
+             <span className={clsx(styles.status, styles[`status--${status}`])} style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.75rem' }}>
+                {statusIcon} 
+                <Typography variant="caption" as="span" style={{color: 'inherit'}}>
+                    {status}
+                </Typography>
              </span>
           )}
         </div>
@@ -95,7 +101,11 @@ export const FileItem: React.FC<FileItemProps> = ({
           </div>
         )}
         
-        {error && <div className={styles.errorMessage}>{error}</div>}
+        {error && (
+             <Typography variant="caption" className={styles.errorMessage} style={{ color: 'var(--danger)' }}>
+                {error}
+            </Typography>
+        )}
       </div>
 
       <button

@@ -2,6 +2,7 @@ import type { TableToolbarProps } from './Table.types';
 import styles from './Table.module.scss';
 import { DEFAULT_TEXTS } from './Table.constants';
 import { Input } from '../Input';
+import { Typography } from '../Typography';
 
 export function TableToolbar<TData>({
   table,
@@ -20,9 +21,9 @@ export function TableToolbar<TData>({
       {/* 1. Bulk Actions (Left) */}
       {table.getSelectedRowModel().rows.length > 0 ? (
           <div className={styles.bulkActions}>
-            <span className={styles.selectionCount}>
+            <Typography variant="body2" className={styles.selectionCount} style={{color: 'inherit'}}>
                 {table.getSelectedRowModel().rows.length} selected
-            </span>
+            </Typography>
              <button
                 className={styles.bulkDeleteButton}
                 onClick={() => {

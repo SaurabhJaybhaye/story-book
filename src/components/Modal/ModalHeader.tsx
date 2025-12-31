@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import styles from './Modal.module.scss';
 import type { ModalHeaderProps } from './Modal.types';
 import { useModalContext } from './ModalContext';
+import { Typography } from '../Typography';
 
 const XIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -23,7 +24,9 @@ export const ModalHeader: React.FC<ModalHeaderProps> = ({
 
   return (
     <div className={clsx(styles.header, className)} {...props}>
-      <div className={styles.title}>{children}</div>
+      <Typography variant="h4" as="h2" className={styles.title}>
+        {children}
+      </Typography>
       {showClose && (
         <button 
           type="button" 

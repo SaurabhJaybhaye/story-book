@@ -1,4 +1,4 @@
-import { ElementType, HTMLAttributes, ReactNode } from 'react';
+import type { ElementType, HTMLAttributes, ReactNode } from 'react';
 
 export type TypographyVariant =
   | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
@@ -38,4 +38,7 @@ export interface TypographyProps extends HTMLAttributes<HTMLElement> {
 
   /** Clamp text to a specific number of lines */
   lineClamp?: number;
+
+  /** HTML for attribute (for labels) */
+  htmlFor?: string;
 }

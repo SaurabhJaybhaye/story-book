@@ -2,6 +2,7 @@ import type { TablePaginationProps } from './Table.types';
 import styles from './Table.module.scss';
 import { DEFAULT_PAGE_SIZES, DEFAULT_TEXTS } from './Table.constants';
 import { Select } from '../Select';
+import { Typography } from '../Typography';
 
 // Icons
 const IconFirst = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>;
@@ -22,13 +23,15 @@ export function TablePagination<TData>({ table, texts }: TablePaginationProps<TD
   return (
     <div className={styles.pagination}>
       <div className={styles.paginationInfo}>
-          {labels.rowsSelected(table.getSelectedRowModel().rows.length)}
+          <Typography variant="body2" color="muted">
+            {labels.rowsSelected(table.getSelectedRowModel().rows.length)}
+          </Typography>
       </div>
 
       <div className={styles.paginationControls}>
-        <span>
+        <Typography variant="body2" className={styles.pageOf}>
           {labels.pageOf(pageIndex + 1, pageCount)}
-        </span>
+        </Typography>
         
         <button
           className={styles.pageButton}
@@ -63,7 +66,9 @@ export function TablePagination<TData>({ table, texts }: TablePaginationProps<TD
           <IconLast />
         </button>
 
-        <span style={{ marginLeft: '1rem' }}>{labels.rowsPerPage}</span>
+        <Typography variant="body2" style={{ marginLeft: '1rem' }}>
+            {labels.rowsPerPage}
+        </Typography>
         <div style={{ width: '80px', display: 'inline-block' }}>
             <Select
               options={DEFAULT_PAGE_SIZES.map(size => ({ value: size, label: String(size) }))}
