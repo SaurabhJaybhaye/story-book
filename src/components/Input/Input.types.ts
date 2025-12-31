@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes, ReactNode, ChangeEvent } from 'react';
 
-export type InputVariant = 'outlined' | 'filled' | 'underlined' | 'ghost';
+export type InputVariant = 'outlined' | 'filled' | 'underlined' | 'ghost' | 'search';
 export type InputSize = 'sm' | 'md' | 'lg';
 
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
