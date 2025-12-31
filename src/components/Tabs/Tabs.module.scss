@@ -1,0 +1,229 @@
+@use 'sass:map';
+
+// Tabs.module.scss
+
+// Variables
+$tabs-border-color: var(--border-color, #e5e7eb);
+$tabs-active-color: var(--primary-color, #3b82f6);
+$tabs-text-color: var(--text-secondary, #6b7280);
+$tabs-text-active: var(--text-primary, #111827);
+$tabs-hover-bg: var(--bg-hover, #f3f4f6);
+$tabs-radius: var(--radius-md, 6px);
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &--vertical {
+    flex-direction: row;
+    height: 100%;
+  }
+}
+
+.tabList {
+  display: flex;
+  position: relative;
+  
+  // No scrollbar by default
+  overflow: hidden;
+  
+  &--scrollable {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none; // Firefox
+    -ms-overflow-style: none; // IE
+    
+    &::-webkit-scrollbar {
+      display: none; // Chrome/Safari
+    }
+  }
+
+  &--vertical {
+    flex-direction: column;
+    border-right: 1px solid $tabs-border-color;
+    
+    &.tabList--scrollable {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+  }
+
+  &--horizontal {
+    flex-direction: row;
+    border-bottom: 1px solid $tabs-border-color;
+    align-items: center;
+  }
+}
+
+.tab {
+  all: unset; // Reset button styles
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: var(--font-sans, sans-serif);
+  font-weight: 500;
+  color: $tabs-text-color;
+  transition: all 0.2s ease;
+  position: relative;
+
+  &:focus-visible {
+    outline: 2px solid $tabs-active-color;
+    outline-offset: -2px;
+    z-index: 10;
+  }
+
+  &:hover:not(:disabled) {
+    color: $tabs-text-active;
+    background-color: $tabs-hover-bg;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--active {
+    color: $tabs-text-active;
+  }
+
+  // --- Sizes ---
+  &--sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    height: 32px;
+  }
+
+  &--md {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    height: 40px;
+  }
+
+  &--lg {
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    height: 48px;
+  }
+}
+
+// --- Variants ---
+
+// 1. Default (Simple text with minimal indicator usually active state is just color)
+.tabs--default {
+  .tabList--horizontal {
+    border-bottom: 1px solid $tabs-border-color;
+  }
+  .tab--active {
+     background-color: transparent;
+     color: $tabs-active-color;
+     font-weight: 600;
+  }
+}
+
+// 2. Underline
+.tabs--underline {
+  .tab {
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; // visually merged with border
+    border-radius: 0;
+    background-color: transparent;
+
+    &:hover:not(:disabled) {
+        border-bottom-color: $tabs-border-color;
+        background-color: transparent;
+    }
+
+    &--active {
+      color: $tabs-active-color;
+      border-bottom-color: $tabs-active-color;
+    }
+  }
+
+  // Vertical underline -> Left or right border
+  .tabList--vertical .tab {
+    border-bottom: none;
+    border-right: 2px solid transparent;
+    margin-right: -1px;
+    margin-bottom: 0;
+    justify-content: flex-start;
+
+    &--active {
+      border-right-color: $tabs-active-color;
+    }
+  }
+}
+
+// 3. Pill
+.tabs--pill {
+  .tabList {
+    gap: 0.5rem;
+    border: none;
+    padding: 0.25rem 0;
+  }
+  
+  .tab {
+    border-radius: 9999px;
+    
+    &--active {
+      background-color: $tabs-active-color !important;
+      color: #fff;
+    }
+  }
+}
+
+// 4. Segmented
+.tabs--segmented {
+   .tabList {
+     background-color: $tabs-hover-bg; // using hover bg as track
+     padding: 4px;
+     border-radius: $tabs-radius;
+     gap: 0;
+     border: none;
+   }
+
+   .tab {
+     flex: 1;
+     border-radius: calc($tabs-radius - 2px);
+     
+     &--active {
+       background-color: #fff;
+       color: $tabs-text-active;
+       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+     }
+     
+     &:hover:not(.tab--active):not(:disabled) {
+        background-color: rgba(255, 255, 255, 0.5);
+     }
+   }
+}
+
+// Panels
+.tabPanel {
+  padding: 1rem 0; // Default padding
+  flex-grow: 1;
+  
+  &--vertical {
+      padding: 0 0 0 1rem;
+  }
+
+  // Animation for fading in
+  &[data-state="active"] {
+    animation: fadeIn 0.2s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab, .tabPanel {
+    transition: none;
+    animation: none;
+  }
+}
