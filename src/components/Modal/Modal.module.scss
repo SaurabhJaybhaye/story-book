@@ -1,0 +1,116 @@
+.portal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // Make sure it doesn't block clicks if we want to allow clicks through (unlikely for modal)
+  // pointer-events: none; // No, modal usually blocks.
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg-glass, rgba(0, 0, 0, 0.5));
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out;
+  cursor: pointer;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  background-color: var(--bg-body, #ffffff);
+  border-radius: var(--border-radius, 12px);
+  box-shadow: var(--card-shadow, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  width: 90vw; // fallback
+  outline: none; // Remove browser default focus outline (we manage focus)
+  animation: scaleIn 0.2s ease-out;
+  color: var(--text-main, #1f2937);
+
+  // Sizes
+  &--sm { width: 400px; }
+  &--md { width: 560px; }
+  &--lg { width: 800px; }
+  &--xl { width: 1140px; }
+  &--full { width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; }
+
+  @media (max-width: 640px) {
+    width: 95vw !important;
+    max-height: 95vh;
+  }
+}
+
+// Subcomponents
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-glass, rgba(0,0,0,0.1));
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-main, #1f2937);
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: var(--border-radius, 6px);
+  color: var(--text-muted, #9ca3af);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: var(--bg-alt, #f3f4f6);
+    color: var(--danger, #ef4444);
+  }
+}
+
+.body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--border-glass, rgba(0,0,0,0.1));
+  background-color: var(--bg-alt, #f9fafb);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  border-bottom-left-radius: var(--border-radius, 12px);
+  border-bottom-right-radius: var(--border-radius, 12px);
+}
+
+// Animations
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { 
+    opacity: 0; 
+    transform: scale(0.95) translateY(10px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+  }
+}
