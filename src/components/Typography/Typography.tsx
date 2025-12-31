@@ -1,4 +1,4 @@
-import { createElement, CSSProperties } from 'react';
+import { createElement, type CSSProperties } from 'react';
 import clsx from 'clsx';
 import type { TypographyProps } from './Typography.types';
 import { VARIANT_TAG_MAP, DEFAULT_TYPOGRAPHY_VARIANT } from './Typography.constants';
