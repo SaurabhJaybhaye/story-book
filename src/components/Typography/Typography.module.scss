@@ -1,0 +1,120 @@
+@use 'sass:map';
+
+.root {
+  margin: 0;
+  padding: 0;
+  color: var(--text-main, #1f2937); /* Default text color, overridable */
+  font-family: var(--font-body, 'Inter', sans-serif);
+  line-height: 1.5;
+  transition: color 0.2s ease;
+}
+
+// --- VARIANTS ---
+
+/* Headings use the heading font family if defined, falling back to body */
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-heading, 'Calistoga', serif);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.h1 { font-size: 3rem; }
+.h2 { font-size: 2.25rem; }
+.h3 { font-size: 1.875rem; }
+.h4 { font-size: 1.5rem; }
+.h5 { font-size: 1.25rem; }
+.h6 { font-size: 1.125rem; }
+
+.subtitle {
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-muted, #6b7280);
+}
+
+.body1 {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.body2 {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.caption {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--text-muted, #6b7280);
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.overline {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #6b7280);
+}
+
+.helper {
+  font-size: 0.75rem;
+  color: var(--text-muted, #6b7280);
+}
+
+.code {
+  font-family: 'Fira Code', 'Roboto Mono', monospace;
+  font-size: 0.875rem;
+  background-color: var(--bg-alt, #f3f4f6);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+}
+
+// --- SIZE OVERRIDES ---
+/* These scale relative to the base size of the variant or provide absolute steps. 
+   For simplicity in this system, we'll use a modifier approach that adjusts ems or rems. */
+   
+.size-xs { font-size: 0.75em; }
+.size-sm { font-size: 0.875em; }
+.size-md { font-size: 1em; } /* Default */
+.size-lg { font-size: 1.125em; }
+.size-xl { font-size: 1.25em; }
+
+// --- WEIGHTS ---
+.weight-light   { font-weight: 300; }
+.weight-regular { font-weight: 400; }
+.weight-medium  { font-weight: 500; }
+.weight-bold    { font-weight: 700; }
+
+// --- ALIGN ---
+.align-left    { text-align: left; }
+.align-center  { text-align: center; }
+.align-right   { text-align: right; }
+.align-justify { text-align: justify; }
+
+// --- TRANSFORM ---
+.transform-uppercase  { text-transform: uppercase; }
+.transform-lowercase  { text-transform: lowercase; }
+.transform-capitalize { text-transform: capitalize; }
+
+// --- TRUNCATION ---
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block; /* Truncation requires block or inline-block with width */
+}
+
+/* Line Clamp utility handled via dynamic style or specific classes if we had a finite set. 
+   We will rely on inline styles for variable clamp or a generic class if we just want common values.
+   However, modern CSS supports -webkit-line-clamp properly. */
+.lineClamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* -webkit-line-clamp value set via style prop */
+}
