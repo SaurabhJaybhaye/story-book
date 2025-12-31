@@ -1,0 +1,55 @@
+@use 'sass:map';
+
+.tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--bg-inverse, #1f2937); /* Dark grey/black */
+  color: var(--text-inverse, #ffffff);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--border-radius, 6px);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  z-index: 10000;
+  pointer-events: none; /* Allows hovering elements below if tooltip overlaps slightly, unless interactive */
+  opacity: 0;
+  transform-origin: center;
+  transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1), transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+  white-space: normal;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  max-width: 300px;
+  width: max-content;
+
+  // GPU Acceleration
+  will-change: transform, opacity;
+
+  &--visible {
+    opacity: 1;
+    // Transform is handled inline for position, but we can add scale here if we want
+  }
+
+  &--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.arrow {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: inherit;
+  transform: rotate(45deg);
+  z-index: -1; // Behind the tooltip content
+  
+  // Optional: Add border if tooltip has border
+  // border: 1px solid ...
+}
+
+/* Optional high contrast mode */
+@media (prefers-contrast: more) {
+  .tooltip {
+    border: 1px solid canvastext;
+  }
+}

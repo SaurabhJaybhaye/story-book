@@ -3,6 +3,8 @@ import type { ColumnDef } from '@tanstack/react-table';
 import { Table } from './Table';
 // import { Checkbox } from '../Checkbox'; // Assuming Checkbox exists
 import React from 'react';
+import { Checkbox } from '../Checkbox';
+import { Button } from '../Button';
 
 
 // Mock Data
@@ -123,6 +125,8 @@ export const WithPagination: Story = {
     },
 };
 
+
+
 export const WithGlobalSearch: Story = {
     args: {
       data: USERS,
@@ -131,11 +135,6 @@ export const WithGlobalSearch: Story = {
       enablePagination: true, // often goes with larger datasets
     },
 };
-
-import { Checkbox } from '../Checkbox';
-import { Button } from '../Button';
-
-// ... (previous imports)
 
 // Row Selection Helpers with Custom Checkbox
 const selectColumns: ColumnDef<User, any>[] = [
