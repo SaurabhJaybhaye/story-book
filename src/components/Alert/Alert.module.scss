@@ -1,0 +1,245 @@
+@use 'sass:map';
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius, 8px);
+  border: 1px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  box-sizing: border-box;
+
+  // Animation states
+  &.enter {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  &.enterActive {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  &.exit {
+    opacity: 1;
+  }
+  &.exitActive {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  // --- VARIANTS ---
+  &--info {
+    background-color: var(--bg-info-subtle, #eff6ff);
+    border-color: var(--border-info-subtle, #dbeafe);
+    color: var(--text-info, #1e40af);
+    .icon { color: var(--info, #3b82f6); }
+
+    :global(.dark) & {
+        background-color: rgba(59, 130, 246, 0.15);
+        border-color: rgba(59, 130, 246, 0.2);
+        color: #bfdbfe; // blue-200
+        .icon { color: #60a5fa; } // blue-400
+    }
+  }
+
+  &--success {
+    background-color: var(--bg-success-subtle, #f0fdf4);
+    border-color: var(--border-success-subtle, #dcfce7);
+    color: var(--text-success, #166534);
+    .icon { color: var(--success, #22c55e); }
+
+    :global(.dark) & {
+        background-color: rgba(34, 197, 94, 0.15);
+        border-color: rgba(34, 197, 94, 0.2);
+        color: #bbf7d0; // green-200
+        .icon { color: #4ade80; } // green-400
+    }
+  }
+
+  &--warning {
+    background-color: var(--bg-warning-subtle, #fefce8);
+    border-color: var(--border-warning-subtle, #fef9c3);
+    color: var(--text-warning, #854d0e);
+    .icon { color: var(--warning, #eab308); }
+
+    :global(.dark) & {
+        background-color: rgba(234, 179, 8, 0.15);
+        border-color: rgba(234, 179, 8, 0.2);
+        color: #fde68a; // yellow-200
+        .icon { color: #facc15; } // yellow-400
+    }
+  }
+
+  &--error {
+    background-color: var(--bg-danger-subtle, #fef2f2);
+    border-color: var(--border-danger-subtle, #fee2e2);
+    color: var(--text-danger, #991b1b);
+    .icon { color: var(--danger, #ef4444); }
+
+    :global(.dark) & {
+        background-color: rgba(239, 68, 68, 0.15);
+        border-color: rgba(239, 68, 68, 0.2);
+        color: #fecaca; // red-200
+        .icon { color: #f87171; } // red-400
+    }
+  }
+
+  &--neutral {
+    background-color: var(--bg-alt, #f3f4f6);
+    border-color: var(--border-glass, #e5e7eb);
+    color: var(--text-main, #374151);
+    .icon { color: var(--text-muted, #6b7280); }
+
+    :global(.dark) & {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        color: #e5e7eb; // gray-200
+        .icon { color: #9ca3af; } // gray-400
+    }
+  }
+
+  // --- SIZES ---
+  &--sm {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+    gap: 0.5rem;
+
+    .icon {
+      width: 14px;
+      height: 14px;
+      margin-top: 1px;
+    }
+    
+    .closeButton {
+      padding: 2px;
+    }
+  }
+
+  &--md {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    gap: 0.75rem;
+
+    .icon {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+    }
+    
+    .closeButton {
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  }
+
+  &--lg {
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    gap: 1rem;
+
+    .icon {
+      width: 22px;
+      height: 22px;
+      margin-top: 3px;
+    }
+    
+    .closeButton {
+      top: 1rem;
+      right: 1.25rem;
+    }
+  }
+
+  // --- PLACEMENT ---
+  &--fixed {
+    position: fixed;
+    z-index: 1000;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-width: 400px; // Reasonable default for toasts
+  }
+
+  &--top-left { top: 1rem; left: 1rem; animation: slideInLeft 0.3s ease; }
+  &--top-right { top: 1rem; right: 1rem; animation: slideInRight 0.3s ease; }
+  &--top-center { top: 1rem; left: 50%; transform: translateX(-50%); animation: slideInDown 0.3s ease; }
+  
+  &--bottom-left { bottom: 1rem; left: 1rem; animation: slideInLeft 0.3s ease; }
+  &--bottom-right { bottom: 1rem; right: 1rem; animation: slideInRight 0.3s ease; }
+  &--bottom-center { bottom: 1rem; left: 50%; transform: translateX(-50%); animation: slideInUp 0.3s ease; }
+}
+
+@keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes slideInDown { from { transform: translate(-50%, -100%); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+@keyframes slideInUp { from { transform: translate(-50%, 100%); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+
+
+// --- SUB-ELEMENTS ---
+
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  min-width: 0; // Prevent flex overflow
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.description {
+  margin: 0;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+.action {
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+// Inline action if space permits or design dictates (optional modifier?)
+// For now, action block is usually below text or to the right. 
+// If it's a simple button, we might want it flexed to the right. 
+// Let's support an action slot that renders in .content or separate.
+// If .hasAction is present, maybe align differently.
+
+.closeButton {
+  flex-shrink: 0;
+  margin-left: auto;
+  margin-top: -0.25rem; // optical alignment
+  margin-right: -0.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.5;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, background-color 0.2s;
+  padding: 4px;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(0,0,0,0.05);
+  }
+  
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    border-radius: 4px;
+  }
+}

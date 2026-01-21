@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
+import { Typography } from '../Typography';
 import { 
   format as formatDate, 
   addMonths, 
@@ -178,7 +179,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
     return (
       <div className={styles.calendar}>
         {WEEK_DAYS.map(day => (
-          <div className={styles.weekDay} key={day}>{day}</div>
+          <Typography variant="caption" className={styles.weekDay} key={day} as="div" textAlign="center">
+            {day}
+          </Typography>
         ))}
         {days.map((day) => {
             const isSameMonthAsView = isSameMonth(day, monthStart);
@@ -206,7 +209,9 @@ export const DatePicker: React.FC<DatePickerProps> = ({
                 aria-label={`Select ${formatDate(day, 'PPPP')}`}
                 aria-pressed={isSelected}
               >
-                {formatDate(day, 'd')}
+                <Typography variant="body2" as="span" style={{ color: 'inherit' }}>
+                    {formatDate(day, 'd')}
+                </Typography>
               </button>
             );
         })}

@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import styles from './Select.module.scss';
 import type { SelectProps } from './Select.types';
 import { DEFAULT_SELECT_SIZE, DEFAULT_SELECT_VARIANT } from './Select.constants';
+import { Typography } from '../Typography';
 
 // We export the generic component to allow consumers to use it with any Option type
 export const Select = <
@@ -38,14 +39,16 @@ export const Select = <
       )}
     >
       {label && (
-        <label
+        <Typography
+          as="label"
           htmlFor={selectId}
+          variant="label"
           className={clsx(styles.label, {
             [styles['label--error']]: isError,
           })}
         >
           {label}
-        </label>
+        </Typography>
       )}
 
       <ReactSelect
@@ -88,13 +91,15 @@ export const Select = <
       />
 
       {(helperText || error) && (
-        <span
+        <Typography
+          as="span"
+          variant="helper"
           className={clsx(styles.helperText, {
             [styles['helperText--error']]: isError,
           })}
         >
           {isError && typeof error !== 'boolean' ? error : helperText}
-        </span>
+        </Typography>
       )}
     </div>
   );

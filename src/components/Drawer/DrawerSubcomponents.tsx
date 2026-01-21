@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import type { DrawerHeaderProps, DrawerBodyProps, DrawerFooterProps } from './Drawer.types';
 import styles from './Drawer.module.scss';
 import { useDrawerClose } from './Drawer'; // We will export this context hook
+import { Typography } from '../Typography';
 
 // Close Icon SVG
 const XIcon = ({ className }: { className?: string }) => (
@@ -33,7 +34,7 @@ export const DrawerHeader: React.FC<DrawerHeaderProps> = ({
 
   return (
     <div className={clsx(styles.header, className)}>
-      <div className={styles.title}>{children}</div>
+      <Typography variant="h5" as="div" className={styles.title}>{children}</Typography>
       {showCloseButton && (
         <button 
           type="button" 

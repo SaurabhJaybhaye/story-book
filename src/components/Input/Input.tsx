@@ -3,6 +3,7 @@ import styles from './Input.module.scss';
 import type { InputProps } from './Input.types';
 import { DEFAULT_SIZE, DEFAULT_VARIANT } from './Input.constants';
 import clsx from 'clsx';
+import { Typography } from '../Typography';
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(({
   variant = DEFAULT_VARIANT,
@@ -98,15 +99,17 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
       className
     )}>
       {label && (
-        <label 
+        <Typography 
+          as="label" 
+          variant="label"
           htmlFor={inputId} 
           className={clsx(styles.label, {
             [styles['label--error']]: isError,
             [styles['label--success']]: isSuccess
           })}
         >
-          {label} {props.required && <span aria-hidden="true">*</span>}
-        </label>
+          {label} {props.required && <Typography as="span" variant="label" style={{color: 'var(--danger)'}}>*</Typography>}
+        </Typography>
       )}
 
       <div className={clsx(
@@ -180,7 +183,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
       {(helperText || error || success || showCount) && (
         <div className={styles.footer}>
           {(error || success || helperText) && (
-            <span 
+            <Typography 
+              as="span"
+              variant="helper"
               id={`${inputId}-helper`}
               className={clsx(styles.helperText, {
                 [styles['helperText--error']]: isError,
@@ -188,13 +193,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
               })}
             >
               {error || success || helperText}
-            </span>
+            </Typography>
           )}
           
           {showCount && maxLength && (
-            <span className={styles.charCount}>
+            <Typography as="span" variant="helper" className={styles.charCount}>
               {charLength} / {maxLength}
-            </span>
+            </Typography>
           )}
         </div>
       )}
