@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Radio, RadioGroup } from './Radio';
 
 const meta: Meta<typeof Radio> = {
-  title: 'Components/Radio',
+  title: 'Form/Radio',
   component: Radio,
   tags: ['autodocs'],
   argTypes: {

@@ -3,7 +3,7 @@ import { Input } from './Input.tsx';
 import { useState } from 'react';
 
 const meta: Meta<typeof Input> = {
-  title: 'Components/Input',
+  title: 'Form/Input',
   component: Input,
   tags: ['autodocs'],
   argTypes: {

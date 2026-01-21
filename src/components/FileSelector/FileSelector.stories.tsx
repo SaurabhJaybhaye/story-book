@@ -4,7 +4,7 @@ import { FileSelector } from './FileSelector';
 import type { ExtendedFile } from './FileSelector.types';
 
 const meta: Meta<typeof FileSelector> = {
-  title: 'Components/FileSelector',
+  title: 'Form/FileSelector',
   component: FileSelector,
   tags: ['autodocs'],
   argTypes: {

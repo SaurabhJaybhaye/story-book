@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Checkbox } from './Checkbox.tsx';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 const meta: Meta<typeof Checkbox> = {
-  title: 'Components/Checkbox',
+  title: 'Form/Checkbox',
   component: Checkbox,
   tags: ['autodocs'],
   argTypes: {

@@ -11,7 +11,7 @@ const options = [
 ];
 
 const meta: Meta<typeof Select> = {
-  title: 'Components/Select',
+  title: 'Form/Select',
   component: Select,
   tags: ['autodocs'],
   argTypes: {
