@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export type NavbarVariant = 'top' | 'side';
 export type NavbarPosition = 'static' | 'sticky' | 'fixed';
