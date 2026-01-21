@@ -3,7 +3,7 @@ import { Navbar } from './Navbar';
 import { Button } from '../Button/Button';
 
 const meta: Meta<typeof Navbar> = {
-  title: 'Components/Navbar',
+  title: 'Layout/Navbar',
   component: Navbar,
   parameters: {
     layout: 'fullscreen',

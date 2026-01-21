@@ -3,7 +3,7 @@ import { Footer } from './Footer';
 import { ThemeProvider } from '../../theme/ThemeProvider';
 
 const meta: Meta<typeof Footer> = {
-  title: 'Components/Footer',
+  title: 'Layout/Footer',
   component: Footer,
   tags: ['autodocs'],
   argTypes: {
