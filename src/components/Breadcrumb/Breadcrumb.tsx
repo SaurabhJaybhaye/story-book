@@ -1,4 +1,4 @@
-import React, { Children, useState, cloneElement, isValidElement } from 'react';
+import React, { Children, useState, isValidElement } from 'react';
 import clsx from 'clsx';
 import type { BreadcrumbProps, BreadcrumbItemObject } from './Breadcrumb.types';
 import { BreadcrumbItem } from './BreadcrumbItem';
@@ -22,7 +22,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({
     // --- Helper to render items from object array ---
     const renderItemsFromArray = (itemList: BreadcrumbItemObject[]) => {
         // Handle collapse logic
-        let itemsToRender = itemList;
+
         const totalItems = itemList.length;
 
         if (maxItems > 0 && totalItems > maxItems && !isExpanded) {

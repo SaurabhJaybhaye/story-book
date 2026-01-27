@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react'; // Typically we might use page.render in pure playwright component testing, but with vitest+browser it varies. 
+// import { render, screen } from '@testing-library/react'; // Typically we might use page.render in pure playwright component testing, but with vitest+browser it varies. 
 // However, the user asked for PLAYWRIGHT. Pure Playwright usually looks like component.spec.tsx.
 // Since 'vitest' is installed, I will assume a vitest-compatible test that might run in browser.
 // But standard 'render' from '@testing-library/react' is safest if available. 

@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useId, type FocusEvent, type ChangeEvent, type MouseEvent } from 'react';
+import { forwardRef, useState, useId, type FocusEvent, type ChangeEvent, type MouseEvent } from 'react';
 import styles from './Input.module.scss';
 import type { InputProps } from './Input.types';
 import { DEFAULT_SIZE, DEFAULT_VARIANT } from './Input.constants';

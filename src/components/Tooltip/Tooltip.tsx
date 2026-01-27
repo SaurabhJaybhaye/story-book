@@ -287,7 +287,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
             (children as any).props.onBlur?.(e);
         },
         onClick: (e: React.MouseEvent) => {
-            onClick(e);
+            onClick();
             (children as any).props.onClick?.(e);
         },
         // Accessibility

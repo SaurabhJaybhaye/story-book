@@ -1,4 +1,4 @@
-import { ReactNode, KeyboardEvent, MouseEvent, CSSProperties, ElementType } from 'react';
+import type { ReactNode, MouseEvent, CSSProperties, ElementType } from 'react';
 
 export type TabsVariant = 'default' | 'underline' | 'pill' | 'segmented';
 export type TabsSize = 'sm' | 'md' | 'lg';

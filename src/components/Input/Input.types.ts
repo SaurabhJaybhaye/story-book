@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, ReactNode, ChangeEvent } from 'react';
+import type { InputHTMLAttributes, ReactNode } from 'react';
 
 export type InputVariant = 'outlined' | 'filled' | 'underlined' | 'ghost' | 'search';
 export type InputSize = 'sm' | 'md' | 'lg';

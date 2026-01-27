@@ -17,7 +17,6 @@ export const Tab: React.FC<TabProps> = ({
         value: activeValue, 
         onValueChange, 
         size, 
-        variant,
         activationMode 
     } = useTabsContext();
     
