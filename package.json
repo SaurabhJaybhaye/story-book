@@ -1,6 +1,6 @@
 {
   "name": "@saurabh05/nexo-ui",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A modern, accessible React component library built with TypeScript and Tailwind CSS.",
   "author": "Saurabh Jaybhaye",
   "license": "MIT",
@@ -27,7 +27,10 @@
     "LICENSE"
   ],
 
-  "sideEffects": false,
+  "style": "dist/style.css",
+  "sideEffects": [
+        "dist/style.css"
+  ],
 
   "scripts": {
     "dev": "vite",

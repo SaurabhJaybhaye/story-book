@@ -18,3 +18,5 @@ export * from './components/Table';
 export * from './components/Tabs';
 export * from './components/Tooltip';
 export * from './components/Typography';
+export * from './theme';
+
